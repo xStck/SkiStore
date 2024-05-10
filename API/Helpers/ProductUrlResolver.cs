@@ -8,10 +8,7 @@ public class ProductUrlResolver(IConfiguration configuration) : IValueResolver<P
 {
     public string Resolve(Product source, ProductDTO destination, string destMember, ResolutionContext context)
     {
-        if (!string.IsNullOrEmpty(source.PictureUrl))
-        {
-            return configuration["ApiUrl"] + source.PictureUrl;
-        }
+        if (!string.IsNullOrEmpty(source.PictureUrl)) return configuration["ApiUrl"] + source.PictureUrl;
 
         return null;
     }
