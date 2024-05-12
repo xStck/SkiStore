@@ -15,7 +15,7 @@ public class ProductsController(IGenericRepository<Product> productRepository,
     IMapper mapper) : BaseApiController
 {
     [HttpGet]
-    public async Task<ActionResult<Pagination<ProductDTO>>> GetProducts([FromQuery]ProductSpecParams productParams)
+    public async Task<ActionResult<Pagination<ProductDTO>>> GetProducts([FromQuery] ProductSpecParams productParams)
     {
         var spec = new ProductsWithTypesAndBrandsSpecification(productParams);
         var countSpec = new ProductWithFiltersForCountSpecification(productParams);

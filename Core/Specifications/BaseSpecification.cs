@@ -30,6 +30,7 @@ public class BaseSpecification<T> : ISpecification<T>
         Take = take;
         IsPagingEnabled = true;
     }
+
     protected void AddInclude(Expression<Func<T, object>> include)
     {
         Includes.Add(include);

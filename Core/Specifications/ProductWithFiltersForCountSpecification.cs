@@ -10,6 +10,5 @@ public class ProductWithFiltersForCountSpecification : BaseSpecification<Product
         (!productParams.TypeId.HasValue || x.ProductTypeId == productParams.TypeId)
     )
     {
-        
     }
 }
