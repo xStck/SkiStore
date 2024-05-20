@@ -1,7 +1,7 @@
-<div class="card h-100 shadow-sm" *ngIf="product">
-    <img src="{{product.pictureUrl}}" alt="{{product.name}}" class="img-fluid">
+<div *ngIf="product" class="card h-100 shadow-sm">
+    <img alt="{{product.name}}" class="img-fluid" src="{{product.pictureUrl}}">
     <div class="card-body d-flex flex-column">
-        <a href="" class="text-decoration-none">
+        <a class="text-decoration-none" href="">
             <h6 class="text-uppercase">
                 {{product.name}}
             </h6>
@@ -10,7 +10,7 @@
         <div class="btn-group mt-auto">
             <button class="btn btn-outline-secondary fa fa-shopping-cart me-2">
             </button>
-            <button class="btn btn-outline-secondary">
+            <button class="btn btn-outline-secondary" routerLink="/shop/{{product.id}}">
                 View
             </button>
         </div>

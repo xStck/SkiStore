@@ -34,14 +34,14 @@
         </section>
         <section class="col-9">
             <div class="d-flex justify-content-between align-items-center pb-2">
-                <app-paging-header [totalCount]="totalCount" [pageNumber]="shopParams.pageNumber"
-                                   [pageSize]="shopParams.pageSize"
+                <app-paging-header [pageNumber]="shopParams.pageNumber" [pageSize]="shopParams.pageSize"
+                                   [totalCount]="totalCount"
                 ></app-paging-header>
                 <div class="d-flex mt-2">
-                    <input (keyup.enter)="onSearch()" class="form-control me-2" placeholder="Search" type="text"
-                           #search>
-                    <button class="btn btn-outline-primary mx-2" (click)="onSearch()">Search</button>
-                    <button class="btn btn-outline-success" (click)="onReset()">Reset</button>
+                    <input #search (keyup.enter)="onSearch()" class="form-control me-2" placeholder="Search"
+                           type="text">
+                    <button (click)="onSearch()" class="btn btn-outline-primary mx-2">Search</button>
+                    <button (click)="onReset()" class="btn btn-outline-success">Reset</button>
                 </div>
             </div>
             <div class="row row-cols-3 g-3 mb-4">
@@ -51,9 +51,9 @@
             </div>
             <div class="d-flex justify-content-center">
                 <app-pager
-                        [totalCount]="totalCount"
-                        [pageSize]="shopParams.pageSize"
                         (pageChanged)="onPageChanged($event)"
+                        [pageSize]="shopParams.pageSize"
+                        [totalCount]="totalCount"
                 ></app-pager>
             </div>
         </section>
