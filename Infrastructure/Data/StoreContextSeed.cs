@@ -1,5 +1,6 @@
 using System.Text.Json;
 using Core.Entities;
+using Core.Entities.OrderAggregate;
 
 namespace Infrastructure.Data;
 
@@ -26,6 +27,13 @@ public static class StoreContextSeed
             var productsData = File.ReadAllText("../Infrastructure/Data/SeedData/products.json");
             var products = JsonSerializer.Deserialize<List<Product>>(productsData);
             context.Products.AddRange(products);
+        }
+
+        if (!context.DeliveryMethods.Any())
+        {
+            var deliveryMethodsData = File.ReadAllText("../Infrastructure/Data/SeedData/delivery.json");
+            var deliveryMethods = JsonSerializer.Deserialize<List<DeliveryMethod>>(deliveryMethodsData);
+            context.DeliveryMethods.AddRange(deliveryMethods);
         }
 
         if (context.ChangeTracker.HasChanges())
