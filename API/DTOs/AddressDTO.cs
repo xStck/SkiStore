@@ -14,5 +14,5 @@ public class AddressDTO
 
     [Required] public string State { get; set; }
 
-    [Required] public string ZipCode { get; set; }
+    [Required] public string Zipcode { get; set; }
 }
