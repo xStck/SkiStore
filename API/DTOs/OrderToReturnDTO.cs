@@ -4,7 +4,7 @@ namespace API.DTOs;
 
 public class OrderToReturnDTO
 {
-    public int id { get; set; }
+    public int Id { get; set; }
     public string BuyerEmail { get; set; }
     public DateTime OrderDate { get; set; } = DateTime.UtcNow;
     public Address ShipToAddress { get; set; }
