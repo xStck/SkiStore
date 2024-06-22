@@ -14,6 +14,7 @@ public class ProductsController(IGenericRepository<Product> productRepository,
     IGenericRepository<ProductType> productTypeRepository,
     IMapper mapper) : BaseApiController
 {
+    [Cached(600)]
     [HttpGet]
     public async Task<ActionResult<Pagination<ProductDTO>>> GetProducts([FromQuery] ProductSpecParams productParams)
     {
@@ -27,6 +28,7 @@ public class ProductsController(IGenericRepository<Product> productRepository,
     }
 
     [HttpGet("{id}")]
+    [Cached(600)]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]
     public async Task<ActionResult<ProductDTO>> GetProduct(int id)
@@ -38,12 +40,14 @@ public class ProductsController(IGenericRepository<Product> productRepository,
         return mapper.Map<Product, ProductDTO>(product);
     }
 
+    [Cached(600)]
     [HttpGet("brands")]
     public async Task<ActionResult<IReadOnlyList<ProductBrand>>> GetProductBrands()
     {
         return Ok(await productBrandRepository.ListAllAsync());
     }
 
+    [Cached(600)]
     [HttpGet("types")]
     public async Task<ActionResult<IReadOnlyList<ProductBrand>>> GetProductTypes()
     {
