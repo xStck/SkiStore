@@ -45,10 +45,15 @@
                     <button (click)="onReset()" class="btn btn-outline-success">Reset</button>
                 </div>
             </div>
+            <ng-container *ngIf="products.length <= 0">
+                <h1>We do not have products of this type from this manufacturer.</h1>
+            </ng-container>
             <div class="row row-cols-3 g-3 mb-4">
-                <div *ngFor="let product of products" class="col">
-                    <app-product-item [product]="product"></app-product-item>
-                </div>
+                <ng-container *ngIf="products.length > 0">
+                    <div *ngFor="let product of products" class="col">
+                        <app-product-item [product]="product"></app-product-item>
+                    </div>
+                </ng-container>
             </div>
             <div class="d-flex justify-content-center">
                 <app-pager

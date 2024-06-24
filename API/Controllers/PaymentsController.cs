@@ -8,9 +8,10 @@ using Stripe;
 
 namespace API.Controllers;
 
-public class PaymentsController(IPaymentService paymentService, ILogger<PaymentsController> logger) : BaseApiController
+public class PaymentsController(IConfiguration config, IPaymentService paymentService,
+    ILogger<PaymentsController> logger) : BaseApiController
 {
-    private const string WhSecret = "whsec_d0960fe1c75c50d123c03c14a8aed93856df0f5dc835b5da05226aef5b98b10b";
+    private readonly string _whSecret = config.GetSection("StripeSettings:WhSecret").Value;
 
     [Authorize]
     [HttpPost("{basketId}")]
@@ -26,7 +27,7 @@ public class PaymentsController(IPaymentService paymentService, ILogger<Payments
     {
         var json = await new StreamReader(Request.Body).ReadToEndAsync();
         var stripeEvent = EventUtility.ConstructEvent(json,
-            Request.Headers["Stripe-Signature"], WhSecret);
+            Request.Headers["Stripe-Signature"], _whSecret);
         PaymentIntent intent;
         Order order;
         switch (stripeEvent.Type)
