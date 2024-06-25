@@ -10,7 +10,7 @@ public static class StoreContextSeed
     public static async Task SeedAsync(StoreContext context)
     {
         var path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-        
+
         if (!context.ProductBrands.Any())
         {
             var brandsData = File.ReadAllText(path + @"/Data/SeedData/brands.json");

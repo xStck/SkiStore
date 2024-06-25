@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace Core.Entities.OrderAggregate;
 
 public class Order : BaseEntity
@@ -24,7 +26,9 @@ public class Order : BaseEntity
 
     public string BuyerEmail { get; set; }
     public DateTime OrderDate { get; set; } = DateTime.UtcNow;
-    public Address ShipToAddress { get; set; }
+
+    [Required] public Address ShipToAddress { get; set; }
+
     public DeliveryMethod DeliveryMethod { get; set; }
     public IReadOnlyList<OrderItem> OrderItems { get; set; }
     public decimal Subtotal { get; set; }
