@@ -20,8 +20,8 @@ public class ProductsController(IGenericRepository<Product> productRepository,
     {
         var spec = new ProductsWithTypesAndBrandsSpecification(productParams);
         var countSpec = new ProductWithFiltersForCountSpecification(productParams);
-        var totalItems = await productRepository.CountAllAsync(countSpec);
-        var products = await productRepository.ListAsync(spec);
+        var totalItems = await productRepository.CountAllWithSpecAsync(countSpec);
+        var products = await productRepository.ListAllWithSpecAsync(spec);
         var data = mapper
             .Map<IReadOnlyList<Product>, IReadOnlyList<ProductDTO>>(products);
         return Ok(new Pagination<ProductDTO>(productParams.PageIndex, productParams.PageSize, totalItems, data));
@@ -34,7 +34,7 @@ public class ProductsController(IGenericRepository<Product> productRepository,
     public async Task<ActionResult<ProductDTO>> GetProduct(int id)
     {
         var spec = new ProductsWithTypesAndBrandsSpecification(id);
-        var product = await productRepository.GetEntityWithSpec(spec);
+        var product = await productRepository.GetEntityWithSpecAsync(spec);
         if (product == null)
             return NotFound(new ApiResponse(404));
         return mapper.Map<Product, ProductDTO>(product);

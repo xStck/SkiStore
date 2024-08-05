@@ -21,7 +21,7 @@ export class LoginComponent {
 
     onSubmit() {
         this.accountService.login(this.loginForm.value).subscribe({
-            next: user => this.router.navigateByUrl(this.returnUrl)
+            next: _ => this.router.navigateByUrl(this.returnUrl),
         });
     }
 }

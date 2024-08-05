@@ -72,7 +72,6 @@ export class ShopService {
     getProduct(id: number) {
         const product = [...this.productCache.values()]
             .reduce((acc, paginatedResult) => {
-                console.log(acc)
                 return {...acc, ...paginatedResult.data.find(x => x.id === id)}
             }, {} as Product)
         if (Object.keys(product).length !== 0) return of(product);

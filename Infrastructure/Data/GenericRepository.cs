@@ -17,17 +17,17 @@ public class GenericRepository<T>(StoreContext context) : IGenericRepository<T> 
         return await context.Set<T>().ToListAsync();
     }
 
-    public async Task<T> GetEntityWithSpec(ISpecification<T> spec)
+    public async Task<T> GetEntityWithSpecAsync(ISpecification<T> spec)
     {
         return await ApplySpecification(spec).FirstOrDefaultAsync();
     }
 
-    public async Task<IReadOnlyList<T>> ListAsync(ISpecification<T> spec)
+    public async Task<IReadOnlyList<T>> ListAllWithSpecAsync(ISpecification<T> spec)
     {
         return await ApplySpecification(spec).ToListAsync();
     }
 
-    public async Task<int> CountAllAsync(ISpecification<T> spec)
+    public async Task<int> CountAllWithSpecAsync(ISpecification<T> spec)
     {
         return await ApplySpecification(spec).CountAsync();
     }

@@ -24,7 +24,7 @@ public class OrderService(IUnitOfWork unitOfWork,
         var deliveryMethod = await unitOfWork.Repository<DeliveryMethod>().GetByIdAsync(deliveryMethodId);
         var subtotal = items.Sum(item => item.Price * item.Quantity);
         var spec = new OrderByPaymentIntentIdSpecification(basket.PaymentIntentId);
-        var order = await unitOfWork.Repository<Order>().GetEntityWithSpec(spec);
+        var order = await unitOfWork.Repository<Order>().GetEntityWithSpecAsync(spec);
         if (order != null)
         {
             order.ShipToAddress = shippingAddress;
@@ -48,13 +48,13 @@ public class OrderService(IUnitOfWork unitOfWork,
     public async Task<IReadOnlyList<Order>> GetOrdersForUserAsync(string buyerEmail)
     {
         var spec = new OrdersWithItemsAndOrderingSpecification(buyerEmail);
-        return await unitOfWork.Repository<Order>().ListAsync(spec);
+        return await unitOfWork.Repository<Order>().ListAllWithSpecAsync(spec);
     }
 
     public async Task<Order> GetOrderByIdAsync(int id, string buyerEmail)
     {
         var spec = new OrdersWithItemsAndOrderingSpecification(id, buyerEmail);
-        return await unitOfWork.Repository<Order>().GetEntityWithSpec(spec);
+        return await unitOfWork.Repository<Order>().GetEntityWithSpecAsync(spec);
     }
 
     public async Task<IReadOnlyList<DeliveryMethod>> GetDeliveryMethodsAsync()

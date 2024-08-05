@@ -62,7 +62,7 @@ public class PaymentService
     public async Task<Order> UpdateOrderPaymentSucceeded(string paymentIntentId)
     {
         var spec = new OrderByPaymentIntentIdSpecification(paymentIntentId);
-        var order = await unitOfWork.Repository<Order>().GetEntityWithSpec(spec);
+        var order = await unitOfWork.Repository<Order>().GetEntityWithSpecAsync(spec);
         if (order == null) return null;
         order.Status = OrderStatus.PaymentReceived;
         await unitOfWork.Complete();
@@ -72,7 +72,7 @@ public class PaymentService
     public async Task<Order> UpdateOrderPaymentFailed(string paymentIntentId)
     {
         var spec = new OrderByPaymentIntentIdSpecification(paymentIntentId);
-        var order = await unitOfWork.Repository<Order>().GetEntityWithSpec(spec);
+        var order = await unitOfWork.Repository<Order>().GetEntityWithSpecAsync(spec);
         if (order == null) return null;
         order.Status = OrderStatus.PaymentFailed;
         await unitOfWork.Complete();
