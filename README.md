@@ -32,18 +32,28 @@ To run the project perform the following steps:
 3. Install Docker
 4. Install the Angular CLI:
    `npm install -g @angular/cli`
-5. (Optional - without it you can't finalize the order. The entire ordering process works, only the final screen is different - instead of the ordering success screen, there is an error screen)
-   Add to `API/appsettings.Development.json` your Stripe API keys:
+5. (**Optional** - without it you can't finalize the order. The entire ordering process works, only the final screen is different - instead of the ordering success screen, there is an error screen)
+
+5.1. Add local listener in stripe webhooks (https://dashboard.stripe.com/test/webhooks/create?endpoint_location=local - instruction) to the endpoint https://localhost:5001/api/payments/webhook with events:
+
+ - payment_intent.payment_failed
+ - payment_intent.succeeded
+
+`stripe listen -f https://localhost:5001/api/payments/webhook -e payment_intent.payment_failed,payment_intent.succeeded`
+
+You will get a WebHook key which you need to paste in step 5.2.
+
+5.2. Add to `API/appsettings.Development.json` your Stripe API keys:
 
 ```
 "StripeSettings": {
-  "PublishableKey": "YOUR PUBLISHABLE KEY",
-  "SecretKey": "YOUR SECRET KEY",
+  "PublishableKey": "YOUR STRIPE PUBLISHABLE KEY",
+  "SecretKey": "YOUR STRIPE SECRET KEY",
   "WhSecret": "YOUR WEBHOOK KEY"
 },
 ```
 
-and also change publishable key in `client\src\app\checkout\checkout-payment\checkout-payment.component.ts`
+5.3. Change stripe publishable key in `client\src\app\checkout\checkout-payment\checkout-payment.component.ts` to yours
 
 6. Open a command prompt in root folder and run `docker-compose up --detach`
 7. Go to the project's `client` folder
