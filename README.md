@@ -32,11 +32,24 @@ To run the project perform the following steps:
 3. Install Docker
 4. Install the Angular CLI:
    `npm install -g @angular/cli`
-5. Open a command prompt in root folder and run `docker-compose up --detach`
-6. Go to the project's `client` folder
-7. Run `npm install`
-8. Run `ng serve` to start the Angular build process
-9. Open a new command window in the root of the project and run the following commands:
+5. (Optional - without it you can't finalize the order. The entire ordering process works, only the final screen is different - instead of the ordering success screen, there is an error screen)
+   Add to `API/appsettings.Development.json` your Stripe API keys:
+
+```
+"StripeSettings": {
+  "PublishableKey": "YOUR PUBLISHABLE KEY",
+  "SecretKey": "YOUR SECRET KEY",
+  "WhSecret": "YOUR WEBHOOK KEY"
+},
+```
+
+and also change publishable key in `client\src\app\checkout\checkout-payment\checkout-payment.component.ts`
+
+6. Open a command prompt in root folder and run `docker-compose up --detach`
+7. Go to the project's `client` folder
+8. Run `npm install`
+9. Run `ng serve` to start the Angular build process
+10. Open a new command window in the root of the project and run the following commands:
 
 ```
 dotnet restore
@@ -44,13 +57,7 @@ dotnet build
 dotnet watch run --project API
 ```
 
-10. Visit http://localhost:4200 in the browser
-
-```
-dotnet restore
-dotnet build
-dotnet watch run
-```
+11. Visit https://localhost:4200/ in the browser
 
 ## Screenshots
 
