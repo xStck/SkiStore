@@ -2,7 +2,7 @@
 
 ## Description
 
-The project is an online store specializing in selling ski equipment. It has integrated payments with Stripe, ensuring secure and reliable transactions. Users can create an account, log in, manage their cart and place orders. JWT token is used to manage user authentication and authorization. To enhance performance and reduce latency, some data is cached to allow for quicker retrieval and improved user experience.
+The project is an online store specializing in ski equipment. It integrates with Stripe for secure and reliable payment processing. Users can create accounts, log in, manage their cart, and place orders. JWT Token is used for user authentication and authorization, ensuring secure access. Additionally, some data is cached to improve performance and reduce latency, resulting in a more efficient user experience.
 
 ## Used technologies
 
@@ -23,13 +23,42 @@ The project is an online store specializing in selling ski equipment. It has int
 
 - Docker - for databases
 
+## Build and run
+
+To run the project perform the following steps:
+
+1. Install Node.js 18.3 or higher
+2. Install ASP.NET core 8.0 or higher
+3. Install Docker
+4. Install the Angular CLI:
+   `npm install -g @angular/cli`
+5. Open a command prompt in root folder and run `docker-compose up --detach`
+6. Go to the project's `client` folder
+7. Run `npm install`
+8. Run `ng serve` to start the Angular build process
+9. Open a new command window in the root of the project and run the following commands:
+
+```
+dotnet restore
+dotnet build
+dotnet watch run --project API
+```
+
+10. Visit http://localhost:4200 in the browser
+
+```
+dotnet restore
+dotnet build
+dotnet watch run
+```
+
 ## Screenshots
 
 **Products with filters**
 ![](ReadmePictures/1.jpg)
 **Product details**
 ![](ReadmePictures/2.jpg)
-**Basket**
+**Cart**
 ![](ReadmePictures/3.jpg)
 **Finalizing order (address)**
 ![](ReadmePictures/4.jpg)
