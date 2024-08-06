@@ -37,7 +37,9 @@ To run the project perform the following steps:
    5.1. Add local listener in stripe webhooks (https://dashboard.stripe.com/test/webhooks/create?endpoint_location=local - instruction) to the endpoint https://localhost:5001/api/payments/webhook with events:
     - payment_intent.payment_failed
     - payment_intent.succeeded
+      
    `stripe listen -f https://localhost:5001/api/payments/webhook -e payment_intent.payment_failed,payment_intent.succeeded`
+   
    You will get a WebHook key which you need to paste in step 5.2.
    
    5.2. Add to `API/appsettings.Development.json` your Stripe API keys:
